@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafe Elis Karaoke — Kota Masohi</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-lora@5/latin-400-normal.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-lora@5/latin-700-normal.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5/latin-300-normal.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5/latin-400-normal.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5/latin-500-normal.css" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #080808;
+            --bg-primary: #0c0c0c;
+            --bg-secondary: #111111;
+            --bg-tertiary: #181818;
+            --bg-card: #141414;
+            --text-primary: #f5f5f5;
+            --text-secondary: #7a7a7a;
+            --text-muted: #444444;
+            --accent: #8b2035;
+            --accent-light: #a82842;
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-medium: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            scrollbar-width: thin;
+            scrollbar-color: var(--text-muted) var(--bg-deep);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Lora', serif;
+            font-weight: 400;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-muted);
+            border-radius: 2px;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 2rem 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(24px);
+            padding: 1.25rem 3.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .nav-brand-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        .nav-brand-text {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.25em;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--text-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            padding: 0.65rem 1.75rem;
+            background: var(--text-primary);
+            color: var(--bg-deep);
+            border: 1px solid var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            background: none;
+            border: none;
+        }
+
+        .nav-hamburger span {
+            width: 22px;
+            height: 1px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 8, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-nav.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            opacity: 0.6;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.18) contrast(1.15);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(8, 8, 8, 0.15) 0%,
+                    rgba(8, 8, 8, 0) 35%,
+                    rgba(8, 8, 8, 0.55) 75%,
+                    rgba(8, 8, 8, 1) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 3.5rem;
+            max-width: 750px;
+        }
+
+        .hero-overline {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s 0.3s forwards;
+        }
+
+        .hero-overline-line {
+            width: 35px;
+            height: 1px;
+            background: var(--text-secondary);
+        }
+
+        .hero-overline-text {
+            font-size: 0.65rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .hero-title {
+            font-size: clamp(3.2rem, 7.5vw, 5.5rem);
+            color: var(--text-primary);
+            margin-bottom: 1.75rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s 0.5s forwards;
+            line-height: 1.05;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 460px;
+            line-height: 1.85;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s 0.7s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s 0.9s forwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.25rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-filled {
+            background: var(--text-primary);
+            color: var(--bg-deep);
+            border: 1px solid var(--text-primary);
+        }
+
+        .btn-filled:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .btn-ghost {
+            color: var(--text-secondary);
+            border: none;
+            padding: 1rem 0;
+            gap: 0.5rem;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-primary);
+        }
+
+        .btn-ghost svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 3.5rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 1.2s forwards;
+        }
+
+        .hero-scroll-indicator span {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            writing-mode: vertical-lr;
+        }
+
+        .scroll-line-anim {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--text-secondary), transparent);
+            animation: scrollPulse 2.5s infinite;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+
+            50% {
+                opacity: 0.2;
+                transform: scaleY(0.5);
+            }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 7rem 3.5rem;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header--center {
+            text-align: center;
+        }
+
+        .section-overline {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-overline-line {
+            width: 25px;
+            height: 1px;
+            background: var(--text-muted);
+        }
+
+        .section-overline-text {
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        .section-desc--center {
+            margin: 0 auto;
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .d1 {
+            transition-delay: 0.08s;
+        }
+
+        .d2 {
+            transition-delay: 0.16s;
+        }
+
+        .d3 {
+            transition-delay: 0.24s;
+        }
+
+        .d4 {
+            transition-delay: 0.32s;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            background: var(--bg-primary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-img-wrap {
+            position: relative;
+        }
+
+        .about-img-wrap img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            filter: brightness(0.65);
+        }
+
+        .about-img-frame {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: -16px;
+            bottom: -16px;
+            border: 1px solid var(--border-subtle);
+            z-index: -1;
+        }
+
+        .about-body .section-overline {
+            margin-bottom: 1rem;
+        }
+
+        .about-body h2 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-body p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.9;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .about-metrics {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .about-metric-value {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .about-metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== MAIN HALL ===== */
+        .hall {
+            background: var(--bg-deep);
+            overflow: hidden;
+        }
+
+        .hall-showcase {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hall-showcase img {
+            width: 100%;
+            height: 550px;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .hall-info {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .hall-info h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.2;
+        }
+
+        .hall-info p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.85;
+            font-size: 0.9rem;
+        }
+
+        .hall-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .hall-spec {
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .hall-spec-value {
+            font-family: 'Lora', serif;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .hall-spec-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ===== CONCEPT ===== */
+        .concept {
+            background: var(--bg-primary);
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .concept-block {
+            padding: 3.5rem 2.5rem;
+            border-right: 1px solid var(--border-subtle);
+            transition: background 0.3s ease;
+        }
+
+        .concept-block:last-child {
+            border-right: none;
+        }
+
+        .concept-block:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .concept-icon {
+            width: 36px;
+            height: 36px;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .concept-block h3 {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            margin-bottom: 0.85rem;
+            font-family: 'Lora', serif;
+        }
+
+        .concept-block p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        /* ===== DRINKS ===== */
+        .drinks {
+            background: var(--bg-deep);
+        }
+
+        .drinks-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .drinks-body .section-overline {
+            margin-bottom: 1rem;
+        }
+
+        .drinks-body h2 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .drinks-body p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .drink-highlight {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .drink-highlight-name {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .drink-highlight-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .drink-highlight-price {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-family: 'Lora', serif;
+        }
+
+        .drink-highlight-price small {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+        }
+
+        .drinks-visual {
+            position: relative;
+        }
+
+        .drinks-visual img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .drinks-visual-frame {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            left: 12px;
+            bottom: 12px;
+            border: 1px solid var(--border-subtle);
+            z-index: -1;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            background: var(--bg-primary);
+            padding: 7rem 0;
+        }
+
+        .gallery .section-header {
+            padding: 0 3.5rem;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            gap: 1rem;
+            padding: 0 3.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            cursor: grab;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-scroll:active {
+            cursor: grabbing;
+        }
+
+        .gallery-pic {
+            flex: 0 0 320px;
+            height: 420px;
+            scroll-snap-align: start;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: brightness(0.65);
+        }
+
+        .gallery-pic:hover img {
+            transform: scale(1.07);
+            filter: brightness(0.5);
+        }
+
+        .gallery-pic-label {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 1.25rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-pic:hover .gallery-pic-label {
+            opacity: 1;
+        }
+
+        /* ===== REVIEWS ===== */
+        .reviews {
+            background: var(--bg-deep);
+            overflow: hidden;
+        }
+
+        .reviews-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .review-card {
+            text-align: center;
+            display: none;
+        }
+
+        .review-card.active {
+            display: block;
+            animation: reviewFade 0.6s ease;
+        }
+
+        @keyframes reviewFade {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .review-mark {
+            font-size: 2.5rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-family: 'Lora', serif;
+        }
+
+        .review-text {
+            font-family: 'Lora', serif;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            line-height: 1.85;
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .review-name {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+
+        .review-title {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
+        }
+
+        .review-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 2.5rem;
+        }
+
+        .review-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .review-dot.active {
+            background: var(--text-primary);
+            transform: scale(1.3);
+        }
+
+        /* ===== BOOKING ===== */
+        .booking {
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .booking::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+        }
+
+
+
+        .booking-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .booking-info .section-overline {
+            margin-bottom: 1rem;
+        }
+
+        .booking-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .booking-info>p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        .booking-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .booking-info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .booking-info-icon {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .booking-info-icon svg {
+            width: 14px;
+            height: 14px;
+            color: var(--text-secondary);
+        }
+
+        .booking-info-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .booking-info-value {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .booking-form-wrap {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 300;
+            transition: border-color 0.3s ease;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--text-muted);
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-field select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23444' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .form-field select option {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--text-primary);
+            color: var(--bg-deep);
+            border: 1px solid var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.25rem;
+        }
+
+        .form-btn:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            background: var(--bg-deep);
+            padding: 7rem 3.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+        }
+
+        .cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-inner h2 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .cta-inner p {
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-subtle);
+            padding: 5rem 3.5rem 2rem;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .footer-about .nav-brand {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-about p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.75;
+            max-width: 280px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-socials a {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .footer-socials a:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        .footer-socials a svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .footer-section h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--text-secondary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hall-info {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .drinks-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .drinks-visual {
+                order: -1;
+            }
+
+            .concept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .concept-block {
+                border-right: none;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .concept-block:last-child {
+                border-bottom: none;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 5rem 1.5rem;
+            }
+
+            .nav {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .nav.scrolled {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            .hero-content {
+                padding: 0 1.5rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .hero-scroll-indicator {
+                left: 1.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-img-wrap img {
+                height: 320px;
+            }
+
+            .about-metrics {
+                gap: 2rem;
+            }
+
+            .hall-showcase img {
+                height: 320px;
+            }
+
+            .hall-specs {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .hall-spec {
+                padding: 1.25rem 0;
+            }
+
+            .drinks-visual img {
+                height: 300px;
+            }
+
+            .booking-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .booking-form-wrap {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .gallery-pic {
+                flex: 0 0 260px;
+                height: 340px;
+            }
+
+            .cta-banner {
+                padding: 5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .about-body h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-metrics {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .hall-info h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="navbar">
+        <a href="#" class="nav-brand">
+            <span class="nav-brand-text">Kafe Elis</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#hall">Hall</a></li>
+            <li><a href="#minuman">Minuman</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+            <li><a href="#reservasi" class="nav-btn">Reservasi</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#tentang" class="mobile-link">Tentang</a>
+        <a href="#hall" class="mobile-link">Hall</a>
+        <a href="#minuman" class="mobile-link">Minuman</a>
+        <a href="#galeri" class="mobile-link">Galeri</a>
+        <a href="#reservasi" class="mobile-link">Reservasi</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="assets/hero.png" alt="Kafe Elis Interior">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-overline">
+                <span class="hero-overline-line"></span>
+                <span class="hero-overline-text">Karaoke & Lounge — Kota Masohi</span>
+            </div>
+            <h1 class="hero-title">Minum Bir.<br>Nyanyi <em>Sepuasnya.</em></h1>
+            <p class="hero-subtitle">
+                Satu-satunya aturan di Kafe Elis: pesan Bir Bintang,
+                lalu nyanyikan lagu apa saja sepanjang malam. Tanpa batas waktu.
+            </p>
+            <div class="hero-actions">
+                <a href="#reservasi" class="btn btn-filled">
+                    Pesan Sekarang
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="#hall" class="btn btn-ghost">
+                    Lihat Hall
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12l7 7 7-7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line-anim"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section about" id="tentang">
+        <div class="about-grid">
+            <div class="about-img-wrap reveal">
+                <img src="assets/tentang.png" alt="Kafe Elis Main Hall">
+                <div class="about-img-frame"></div>
+            </div>
+            <div class="about-body">
+                <div class="section-overline reveal">
+                    <span class="section-overline-line"></span>
+                    <span class="section-overline-text">Tentang Kami</span>
+                </div>
+                <h2 class="reveal d1">Tempat Nongkrong<br>yang Berbeda di<br>Masohi</h2>
+                <p class="reveal d2">
+                    Kafe Elis Karaoke lahir dari ide sederhana: orang-orang ingin
+                    bernyanyi sambil minum bir bersama teman-teman, tanpa harus
+                    khawatir soal tagihan jam per jam.
+                </p>
+                <p class="reveal d3">
+                    Konsep kami jelas — beli bir, duduk di hall kami, dan nyanyikan
+                    lagu apa saja dari koleksi kami. Tidak ada biaya ruangan. Tidak
+                    ada batas waktu. Selama gelas masih terisi, lagu masih bisa
+                    dipilih.
+                </p>
+                <p class="reveal d4">
+                    Kami menyediakan Bir Bintang dingin, sound system yang layak
+                    untuk panggung, dan infocus besar untuk lirik lagu. Sisanya
+                    terserah Anda.
+                </p>
+                <div class="about-metrics reveal d4">
+                    <div>
+                        <span class="about-metric-value">1</span>
+                        <span class="about-metric-label">Hall Utama</span>
+                    </div>
+                    <div>
+                        <span class="about-metric-value">40K+</span>
+                        <span class="about-metric-label">Koleksi Lagu</span>
+                    </div>
+                    <div>
+                        <span class="about-metric-value">∞</span>
+                        <span class="about-metric-label">Nyanyi Tanpa Batas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN HALL -->
+    <section class="section hall" id="hall">
+        <div class="section-header section-header--center">
+            <div class="section-overline reveal">
+                <span class="section-overline-line"></span>
+                <span class="section-overline-text">Main Hall</span>
+            </div>
+            <h2 class="section-title reveal d1">Satu Hall. Banyak Suara.</h2>
+            <p class="section-desc section-desc--center reveal d2">
+                Hall utama kami dirancang untuk kebersamaan.
+                Luas, nyaman, dan dibuat agar semua orang merasa seperti di rumah sendiri.
+            </p>
+        </div>
+        <div class="hall-showcase reveal">
+            <img src="assets/hall.png" alt="Main Hall Kafe Elis">
+        </div>
+        <div class="hall-info">
+            <div>
+                <h3 class="reveal">Ruang yang Dibuat<br>untuk Bersenang-senang</h3>
+                <p class="reveal d1">
+                    Hall utama Kafe Elis cukup luas untuk menampung hingga 40 orang.
+                    Dengan sofa yang diatur membentuk area-area kecil, Anda bisa
+                    memilih duduk dekat depan untuk tampil, atau di sudut yang
+                    lebih santai untuk menikmati pertunjukan orang lain.
+                </p>
+                <p class="reveal d2">
+                    Infocus besar menampilkan lirik lagu, pencahayaan yang bisa
+                    diatur, dan mikrofon wireless — semua sudah tersedia. Tinggal
+                    pesan Bir Bintang dan mulai bernyanyi.
+                </p>
+            </div>
+            <div>
+                <div class="hall-specs">
+                    <div class="hall-spec reveal">
+                        <div class="hall-spec-value">40 Orang</div>
+                        <div class="hall-spec-label">Kapasitas Maksimal</div>
+                    </div>
+                    <div class="hall-spec reveal d1">
+                        <div class="hall-spec-value">Infocus</div>
+                        <div class="hall-spec-label">Layar Lirik</div>
+                    </div>
+                    <div class="hall-spec reveal d2">
+                        <div class="hall-spec-value">2x Mikrofon</div>
+                        <div class="hall-spec-label">Wireless</div>
+                    </div>
+                    <div class="hall-spec reveal d3">
+                        <div class="hall-spec-value">40.000+</div>
+                        <div class="hall-spec-label">Lagu Tersedia</div>
+                    </div>
+                    <div class="hall-spec reveal">
+                        <div class="hall-spec-value">Sound System</div>
+                        <div class="hall-spec-label">Speaker JBL Pro</div>
+                    </div>
+                    <div class="hall-spec reveal d1">
+                        <div class="hall-spec-value">AC + Ventilasi</div>
+                        <div class="hall-spec-label">Nyaman Sepanjang Malam</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section class="section concept">
+        <div class="section-header section-header--center">
+            <div class="section-overline reveal">
+                <span class="section-overline-line"></span>
+                <span class="section-overline-text">Konsep</span>
+            </div>
+            <h2 class="section-title reveal d1">Bagaimana Cara Kerjanya</h2>
+        </div>
+        <div class="concept-grid">
+            <div class="concept-block reveal">
+                <svg class="concept-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <rect x="4" y="8" width="28" height="22" rx="2" />
+                    <path d="M4 14h28" />
+                    <path d="M12 8V4a2 2 0 012-2h8a2 2 0 012 2v4" />
+                </svg>
+                <h3>Datang & Duduk</h3>
+                <p>Langsung masuk ke hall utama. Pilih tempat duduk yang Anda suka. Tidak perlu booking ruangan.</p>
+            </div>
+            <div class="concept-block reveal d1">
+                <svg class="concept-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M18 4v28M18 4c-4 0-8 4-8 10h16c0-6-4-10-8-10z" />
+                    <path d="M10 14v8c0 4.4 3.6 8 8 8s8-3.6 8-8v-8" />
+                </svg>
+                <h3>Pesan Bir Bintang</h3>
+                <p>Pesan Bir Bintang dingin — ini adalah tiket Anda untuk nyanyi sepuasnya tanpa batas waktu.</p>
+            </div>
+            <div class="concept-block reveal d2">
+                <svg class="concept-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <circle cx="18" cy="18" r="14" />
+                    <path d="M14 12l10 6-10 6V12z" fill="currentColor" />
+                </svg>
+                <h3>Nyanyi Tanpa Batas</h3>
+                <p>Pilih lagu dari 40.000+ koleksi kami. Nyanyikan berapa lagu pun. Selama Anda menikmati malam Anda.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DRINKS -->
+    <section class="section drinks" id="minuman">
+        <div class="drinks-inner">
+            <div class="drinks-body">
+                <div class="section-overline reveal">
+                    <span class="section-overline-line"></span>
+                    <span class="section-overline-text">Minuman</span>
+                </div>
+                <h2 class="reveal d1">Penyegar Suara,<br>Teman Bernyanyi.</h2>
+                <p class="reveal d2">
+                    Di Kafe Elis, kami menyediakan Bir Bintang dingin yang sempurna untuk
+                    menemani malam Anda. Bagi yang tidak mengonsumsi alkohol, kami juga
+                    menyediakan aneka minuman ringan yang menyegarkan.
+                </p>
+                <p class="reveal d3">
+                    Kami tidak menyajikan makanan, agar kami dapat fokus menghadirkan
+                    suasana terbaik dan minuman penyegar dahaga selama Anda bernyanyi
+                    sepuasnya tanpa henti.
+                </p>
+                <div class="drink-highlight reveal d4">
+                    <div class="drink-highlight-name">Bir Bintang & Minuman Ringan</div>
+                    <div class="drink-highlight-desc">
+                        Nikmati Bir Bintang yang dingin, atau pilih berbagai minuman ringan (soft drinks)
+                        sebagai teman setia Anda berkaraoke. Cukup pesan minuman sebagai tiket masuk Anda!
+                    </div>
+                    <div class="drink-highlight-price">Tersedia <small>di Kafe Elis</small></div>
+                </div>
+            </div>
+            <div class="drinks-visual reveal">
+                <img src="assets/drink.png" alt="Minuman di Kafe Elis">
+                <div class="drinks-visual-frame"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery" id="galeri">
+        <div class="section-header">
+            <div class="section-overline reveal">
+                <span class="section-overline-line"></span>
+                <span class="section-overline-text">Galeri</span>
+            </div>
+            <h2 class="section-title reveal d1">Suasana di Kafe Elis</h2>
+        </div>
+        <div class="gallery-scroll" id="galleryScroll">
+            <div class="gallery-pic">
+                <img src="assets/main.png" alt="Main Hall">
+                <span class="gallery-pic-label">Main Hall</span>
+            </div>
+            <div class="gallery-pic">
+                <img src="assets/sofa.png" alt="Area Sofa">
+                <span class="gallery-pic-label">Area Sofa</span>
+            </div>
+            <div class="gallery-pic">
+                <img src="assets/teras.png" alt="Teras Kafe">
+                <span class="gallery-pic-label">Teras Kafe</span>
+            </div>
+            <div class="gallery-pic">
+                <img src="assets/operator.png" alt="Sound System">
+                <span class="gallery-pic-label">Sound System</span>
+            </div>
+            <div class="gallery-pic">
+                <img src="assets/kafe.png" alt="Suasana Kafe">
+                <span class="gallery-pic-label">Suasana Kafe</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="section reviews">
+        <div class="section-header section-header--center">
+            <div class="section-overline reveal">
+                <span class="section-overline-line"></span>
+                <span class="section-overline-text">Testimoni</span>
+            </div>
+            <h2 class="section-title reveal d1">Kata Mereka</h2>
+        </div>
+        <div class="reviews-wrap">
+            <div class="review-card active" data-idx="0">
+                <div class="review-mark">"</div>
+                <p class="review-text">
+                    Konsepnya simpel tapi brilian. Beli bir, nyanyi sepuasnya.
+                    Tidak ada biaya tambahan. Kami duduk dari jam 8 malam sampai
+                    jam 1 pagi dan tidak diganggu. Suasana enak banget.
+                </p>
+                <div class="review-name">Firdaus Latuconsina</div>
+                <div class="review-title">Pengunjung Rutin</div>
+            </div>
+            <div class="review-card" data-idx="1">
+                <div class="review-mark">"</div>
+                <p class="review-text">
+                    Tempat nongkrong terbaik di Masohi. Bir Bintang selalu dingin,
+                    lagu-lagu lengkap, dan orang-orang di sana ramah-ramah.
+                    Kayak karaoke di rumah tapi lebih seru.
+                </p>
+                <div class="review-name">Maria Tisel</div>
+                <div class="review-title">Mahasiswa</div>
+            </div>
+            <div class="review-card" data-idx="2">
+                <div class="review-mark">"</div>
+                <p class="review-text">
+                    Saya suka bahwa mereka tidak jual makanan. Fokusnya jelas —
+                    bir dan karaoke. Sound system-nya juga bagus untuk ukuran
+                    tempat di Masohi. Worth it banget.
+                </p>
+                <div class="review-name">Ahmad Souhaly</div>
+                <div class="review-title">Musisi Lokal</div>
+            </div>
+            <div class="review-dots">
+                <button class="review-dot active" data-slide="0" aria-label="Review 1"></button>
+                <button class="review-dot" data-slide="1" aria-label="Review 2"></button>
+                <button class="review-dot" data-slide="2" aria-label="Review 3"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+        <div class="cta-inner reveal">
+            <div class="section-overline" style="justify-content: center;">
+                <span class="section-overline-line"></span>
+                <span class="section-overline-text">Buka Setiap Hari</span>
+                <span class="section-overline-line"></span>
+            </div>
+            <h2 class="reveal d1">Malam Ini,<br>Nyanyi di Kafe Elis</h2>
+            <p class="reveal d2">
+                Tidak perlu reservasi. Datang saja, pesan Bir Bintang,
+                dan ambil mikrofon. Tapi jika Anda ingin memastikan tempat,
+                hubungi kami lebih dulu.
+            </p>
+            <div class="reveal d3" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="#reservasi" class="btn btn-filled">
+                    Reservasi
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <a href="https://wa.me/6281376415711" class="btn btn-ghost" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                    </svg>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING -->
+    <section class="section booking" id="reservasi">
+        <div class="booking-inner">
+            <div class="booking-info">
+                <div class="section-overline reveal">
+                    <span class="section-overline-line"></span>
+                    <span class="section-overline-text">Reservasi</span>
+                </div>
+                <h2 class="reveal d1">Amankan<br>Tempat Anda</h2>
+                <p class="reveal d2">
+                    Walk-in selalu diterima, tapi reservasi menjamin Anda
+                    dapat tempat duduk terbaik. Beri tahu kami berapa orang
+                    dan kapan Anda datang.
+                </p>
+                <div class="booking-info-list reveal d3">
+                    <div class="booking-info-row">
+                        <div class="booking-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="booking-info-label">Alamat</div>
+                            <div class="booking-info-value">Kafe Elis, Jalan Karai Atas, Kota Masohi,<br>Maluku Tengah,
+                                Indonesia</div>
+                        </div>
+                    </div>
+                    <div class="booking-info-row">
+                        <div class="booking-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path
+                                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="booking-info-label">Telepon / WhatsApp</div>
+                            <div class="booking-info-value">+62 813-7641-5711</div>
+                        </div>
+                    </div>
+                    <div class="booking-info-row">
+                        <div class="booking-info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="booking-info-label">Jam Buka</div>
+                            <div class="booking-info-value">Setiap Hari: 19.00 — 02.00 WIT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="booking-form-wrap reveal">
+                <form id="bookingForm">
+                    <div class="form-field">
+                        <label class="form-label">Nama</label>
+                        <input type="text" placeholder="Nama lengkap" required>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="form-label">Telepon / WhatsApp</label>
+                            <input type="tel" placeholder="08xx xxxx xxxx" required>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Jumlah Orang</label>
+                            <input type="number" placeholder="Berapa orang" min="1" max="40" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="form-label">Tanggal</label>
+                            <input type="date" required>
+                        </div>
+                        <div class="form-field">
+                            <label class="form-label">Waktu Kedatangan</label>
+                            <select required>
+                                <option value="" disabled selected>Pilih jam</option>
+                                <option>19:00</option>
+                                <option>20:00</option>
+                                <option>21:00</option>
+                                <option>22:00</option>
+                                <option>23:00</option>
+                                <option>00:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label">Catatan</label>
+                        <textarea placeholder="Ada permintaan khusus? (opsional)"></textarea>
+                    </div>
+                    <button type="submit" class="form-btn">Kirim Reservasi</button>
+                    <p class="form-note">Konfirmasi via WhatsApp dalam 30 menit</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div class="footer-about">
+                <a href="#" class="nav-brand">
+                    <span class="nav-brand-text">Kafe Elis</span>
+                </a>
+                <p>
+                    Kafe Elis, Jalan Karai Atas, Kota Masohi,<br>
+                    Maluku Tengah, Indonesia.
+                </p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/6281376415711" aria-label="WhatsApp" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Halaman</h4>
+                <ul>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#hall">Main Hall</a></li>
+                    <li><a href="#minuman">Minuman</a></li>
+                    <li><a href="#galeri">Galeri</a></li>
+                    <li><a href="#reservasi">Reservasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Konsep</h4>
+                <ul>
+                    <li><a href="#hall">Nyanyi Sepuasnya</a></li>
+                    <li><a href="#minuman">Bir Bintang</a></li>
+                    <li><a href="#">Tanpa Biaya Ruangan</a></li>
+                    <li><a href="#">Walk-in Dibuka</a></li>
+                    <li><a href="#">Acara Privat</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Jam Buka</h4>
+                <ul>
+                    <li><a href="#">Senin – Minggu</a></li>
+                    <li><a href="#">19.00 – 02.00 WIT</a></li>
+                    <li><a href="#" style="margin-top: 0.75rem;">Walk-in selalu diterima</a></li>
+                    <li><a href="#">Selama masih ada Bir Bintang</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Kafe Elis Karaoke. Kafe Elis, Jalan Karai Atas, Kota Masohi, Maluku Tengah, Indonesia. Minum
+                bir secukupnya.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privasi</a>
+                <a href="#">Ketentuan</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // NAV SCROLL
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.pageYOffset > 60);
+        });
+
+        // HAMBURGER
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // REVEAL
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // REVIEWS
+        const reviewCards = document.querySelectorAll('.review-card');
+        const reviewDots = document.querySelectorAll('.review-dot');
+        let currentReview = 0;
+        let reviewTimer;
+
+        function showReview(index) {
+            reviewCards.forEach(c => c.classList.remove('active'));
+            reviewDots.forEach(d => d.classList.remove('active'));
+            reviewCards[index].classList.add('active');
+            reviewDots[index].classList.add('active');
+            currentReview = index;
+        }
+
+        reviewDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                showReview(parseInt(dot.dataset.slide));
+                clearInterval(reviewTimer);
+                reviewTimer = setInterval(() => showReview((currentReview + 1) % reviewCards.length), 6000);
+            });
+        });
+
+        reviewTimer = setInterval(() => showReview((currentReview + 1) % reviewCards.length), 6000);
+
+        // GALLERY DRAG
+        const galleryScroll = document.getElementById('galleryScroll');
+        let isDragging = false, startPointer, scrollStart;
+
+        galleryScroll.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startPointer = e.pageX - galleryScroll.offsetLeft;
+            scrollStart = galleryScroll.scrollLeft;
+            galleryScroll.style.cursor = 'grabbing';
+        });
+
+        galleryScroll.addEventListener('mouseleave', () => { isDragging = false; galleryScroll.style.cursor = ''; });
+        galleryScroll.addEventListener('mouseup', () => { isDragging = false; galleryScroll.style.cursor = ''; });
+        galleryScroll.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            galleryScroll.scrollLeft = scrollStart - (e.pageX - galleryScroll.offsetLeft - startPointer);
+        });
+
+        // FORM
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.form-btn');
+            const orig = btn.textContent;
+            btn.textContent = 'Mengirim...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.textContent = 'Terkirim ✓';
+                setTimeout(() => {
+                    btn.textContent = orig;
+                    btn.disabled = false;
+                    e.target.reset();
+                }, 2500);
+            }, 1200);
+        });
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // HERO PARALLAX
+        window.addEventListener('scroll', () => {
+            const heroImg = document.querySelector('.hero-bg img');
+            if (heroImg && window.pageYOffset < window.innerHeight) {
+                heroImg.style.transform = `translateY(${window.pageYOffset * 0.35}px) scale(1.08)`;
+            }
+        });
+    </script>
+</body>
+
+</html>
