@@ -1894,7 +1894,7 @@ SOFTWARE.
 | 📍 **Lokasi** | Jalan Karai Atas, Kota Masohi, Maluku Tengah 97511 | [Google Maps](https://maps.google.com/?q=Kafe+Elis+Masohi) |
 | 📞 **WhatsApp** | [+62 813-7641-5711](https://wa.me/6281376415711) | `https://wa.me/6281376415711` |
 | 📧 **Email** | belum ada | `belum ada` |
-| 🌐 **Website** | [kafeelis.id](https://kafeelis.id) | `https://kafeelis.id` |
+| 🌐 **Website** | [https://ikyletwar.github.io/KafeElis/](https://ikyletwar.github.io/KafeElis/) | `[https://kafeelis.id](https://ikyletwar.github.io/KafeElis/)` |
 | 📱 **Instagram** | [belum ada](belum ada) | `belum ada` |
 
 ### 🕒 Jam Operasional
