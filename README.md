@@ -1895,7 +1895,7 @@ SOFTWARE.
 | 📞 **WhatsApp** | [+62 813-7641-5711](https://wa.me/6281376415711) | `https://wa.me/6281376415711` |
 | 📧 **Email** | belum ada | `belum ada` |
 | 🌐 **Website** | [https://ikyletwar.github.io/KafeElis/](https://ikyletwar.github.io/KafeElis/) | `[https://kafeelis.id](https://ikyletwar.github.io/KafeElis/)` |
-| 📱 **Instagram** | [belum ada](belum ada) | `belum ada` |
+| 📱 **Instagram** | belum ada | `belum ada` |
 
 ### 🕒 Jam Operasional
 ```
